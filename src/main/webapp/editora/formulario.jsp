@@ -1,16 +1,39 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: leo_morikio
-  Date: 13/04/26
-  Time: 16:14
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>Livraria Virtual</title>
+</head>
+
+<body>
+<div align="center">
+    <h1>Gerenciamento de Editoras</h1>
+    <h2>
+        <a href="lista">Lista de Editoras</a>
+    </h2>
+</div>
+<div align="center">
+    <c:choose>
+        <c:when test="${editora != null}">
+            <form action="atualizacao" method="post">
+                <%@include file="campos.jsp"%>
+            </form>
+        </c:when>
+        <c:otherwise>
+            <form action="insercao" method="post">
+                <%@include file="campos.jsp"%>
+            </form>
+        </c:otherwise>
+    </c:choose>
+</div>
+<c:if test="${!empty requestScope.mensagens}">
+    <ul class="erro">
+        <c:forEach items="${requestScope.mensagens}" var="mensagem">
+            <li>${mensagem}</li>
+        </c:forEach>
+    </ul>
+</c:if>
+</body>
 </html>
